@@ -1,0 +1,1 @@
+{"message":"Cannot GET /logs/download/teste.txt","error":"Not Found","statusCode":404}
