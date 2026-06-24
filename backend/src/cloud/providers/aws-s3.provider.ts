@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import {
   S3Client,
   ListObjectsV2Command,
+  GetObjectCommand,
 } from '@aws-sdk/client-s3';
 
 import { CloudStorageProvider } from '../interfaces/cloud-storage.interface';
@@ -43,9 +44,16 @@ export class AwsS3Provider
   async downloadFile(
     bucket: string,
     key: string,
-  ) {
-    throw new Error(
-      'Not implemented yet',
+  ): Promise<Buffer> {
+    const result = await this.client.send(
+      new GetObjectCommand({
+        Bucket: bucket,
+        Key: key,
+      }),
+    );
+
+    return Buffer.from(
+      await result.Body!.transformToByteArray(),
     );
   }
 }
