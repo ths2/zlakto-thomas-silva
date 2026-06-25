@@ -121,11 +121,9 @@ The core backend API endpoints are:
 
 ## 9. Screenshots
 
-*(Placeholder for screenshots of the Home, Login, and Logs pages)*
-
-![Home Page](<path-to-home-screenshot.png>)
-![Login Page](<path-to-login-screenshot.png>)
-![Logs Page](<path-to-logs-screenshot.png>)
+![Home Page](./screenshots/home.png)
+![Login Page](./screenshots/login.png)
+![Logs Page](./screenshots/logs.png)
 
 ---
 
