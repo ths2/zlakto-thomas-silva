@@ -10,7 +10,7 @@ on:
 
 env:
   AWS_REGION: us-east-1
-  ECR_REPOSITORY: 381491906704.dkr.ecr.us-east-1.amazonaws.com/cloud-log-access-backend
+  ECR_REPOSITORY: '381491906704.dkr.ecr.us-east-1.amazonaws.com/cloud-log-access-backend'
 
 jobs:
   build-and-push:
