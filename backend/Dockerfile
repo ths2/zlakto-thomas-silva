@@ -10,9 +10,6 @@ RUN npm ci
 # Copy the rest of the application source code
 COPY . .
 
-# List files for debugging
-RUN ls -la /usr/src/app/src
-
 # Build the application
 RUN npm run build
 
