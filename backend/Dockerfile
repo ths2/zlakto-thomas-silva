@@ -5,13 +5,13 @@ FROM node:22-alpine AS builder
 WORKDIR /usr/src/app/backend
 
 # Copy package files from the backend folder
-COPY backend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm ci
 
 # Copy the rest of the backend source code
-COPY backend/ .
+COPY . .
 
 # List files for debugging
 RUN ls -R .
