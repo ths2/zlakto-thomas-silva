@@ -1,5 +1,5 @@
 // trigger pipeline
-// trigger pipeline
+// trigger pipeline 2
 import Link from 'next/link';
 
 export default function HomePage() {
