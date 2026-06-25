@@ -1,14 +1,17 @@
 # Stage 1: Build the application
 FROM node:22-alpine AS builder
 
+# Set the working directory
 WORKDIR /usr/src/app
 
-# Copy package files and install dependencies
-COPY package*.json ./
+# Copy package files from the backend folder
+COPY backend/package*.json ./
+
+# Install dependencies
 RUN npm ci
 
-# Copy the rest of the application source code
-COPY . .
+# Copy the rest of the backend source code
+COPY backend/ .
 
 # Build the application
 RUN npm run build
@@ -18,9 +21,8 @@ FROM node:22-alpine
 
 WORKDIR /usr/src/app
 
-# Copy package files for production dependencies
-COPY package*.json ./
-RUN npm install --only=production
+# Copy production dependencies from the builder stage
+COPY --from=builder /usr/src/app/node_modules ./node_modules
 
 # Copy the built application from the builder stage
 COPY --from=builder /usr/src/app/dist ./dist
@@ -29,4 +31,4 @@ COPY --from=builder /usr/src/app/dist ./dist
 EXPOSE 3000
 
 # Command to run the application
-CMD ["npm", "run", "start:prod"]
+CMD ["node", "dist/main"]
