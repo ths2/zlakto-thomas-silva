@@ -13,9 +13,6 @@ RUN npm ci
 # Copy the rest of the backend source code
 COPY backend/ .
 
-# List files for debugging
-RUN ls -la src
-
 # Build the application
 RUN npm run build
 

@@ -1,0 +1,9 @@
+# Git
+.git
+.gitignore
+
+# Node
+node_modules
+
+# Infra
+infra/aws/cdk.out
