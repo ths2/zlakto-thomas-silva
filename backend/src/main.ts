@@ -4,8 +4,6 @@ import { AppModule } from './app.module';
 // Trigger backend deploy
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(3000);
 }
 bootstrap();
-// Trigger CI
