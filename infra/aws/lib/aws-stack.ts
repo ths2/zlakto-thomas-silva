@@ -28,7 +28,6 @@ export class AwsStack extends cdk.Stack {
       autoDeleteImages: true,
     });
 
-    /*
     // 3. App Runner Services (pointing to our ECR images)
     const backendService = new apprunner.Service(this, 'BackendService', {
       source: apprunner.Source.fromEcr({
@@ -52,7 +51,8 @@ export class AwsStack extends cdk.Stack {
       }),
       serviceName: 'cloud-log-frontend-service',
     });
-    */
+
+    frontendService.node.addDependency(backendService);
 
     // 4. Outputs
     new cdk.CfnOutput(this, 'BucketName', {
@@ -67,7 +67,6 @@ export class AwsStack extends cdk.Stack {
       value: frontendRepository.repositoryUri,
     });
 
-    /*
     new cdk.CfnOutput(this, 'BackendServiceUrl', {
       value: backendService.serviceUrl,
     });
@@ -75,6 +74,5 @@ export class AwsStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'FrontendServiceUrl', {
       value: frontendService.serviceUrl,
     });
-    */
   }
 }
