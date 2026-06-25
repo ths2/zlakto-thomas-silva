@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 export default function HomePage() {
   return (
-    {/* Trigger pipeline */}
     <main className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-8 text-center">
       <div className="w-full max-w-2xl">
         <h1 className="text-5xl font-bold text-gray-800">
