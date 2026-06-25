@@ -19,11 +19,13 @@ export class AwsStack extends cdk.Stack {
     const backendRepository = new ecr.Repository(this, 'BackendRepository', {
       repositoryName: 'cloud-log-access-backend',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteImages: true,
     });
 
     const frontendRepository = new ecr.Repository(this, 'FrontendRepository', {
       repositoryName: 'cloud-log-access-frontend',
       removalPolicy: cdk.RemovalPolicy.DESTROY,
+      autoDeleteImages: true,
     });
 
     // 3. Criar App Runner Service para o backend
@@ -36,7 +38,23 @@ export class AwsStack extends cdk.Stack {
       serviceName: 'cloud-log-backend-service',
     });
 
-    // 4. Criar outputs
+    // 4. Criar App Runner Service para o frontend
+    const frontendService = new apprunner.Service(this, 'FrontendService', {
+      source: apprunner.Source.fromEcr({
+        imageConfiguration: {
+          port: 3001,
+          environmentVariables: {
+            // Passa a URL do backend para o frontend como uma variável de ambiente
+            NEXT_PUBLIC_API_URL: backendService.serviceUrl,
+          },
+        },
+        repository: frontendRepository,
+        tagOrDigest: 'latest',
+      }),
+      serviceName: 'cloud-log-frontend-service',
+    });
+
+    // 5. Criar outputs
     new cdk.CfnOutput(this, 'BucketName', {
       value: logBucket.bucketName,
       description: 'The name of the S3 bucket for logs.',
@@ -52,9 +70,14 @@ export class AwsStack extends cdk.Stack {
       description: 'The URI of the frontend ECR repository.',
     });
 
-    new cdk.CfnOutput(this, 'AppRunnerServiceUrl', {
+    new cdk.CfnOutput(this, 'BackendServiceUrl', {
       value: backendService.serviceUrl,
       description: 'The URL of the App Runner service for the backend.',
+    });
+
+    new cdk.CfnOutput(this, 'FrontendServiceUrl', {
+      value: frontendService.serviceUrl,
+      description: 'The URL of the App Runner service for the frontend.',
     });
   }
 }
