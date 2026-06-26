@@ -134,3 +134,12 @@ The core backend API endpoints are:
 *   **Zustand (State Management):** Preferred for its simplicity, minimal boilerplate, and hook-based API, offering a lightweight yet powerful solution for managing global state in React.
 *   **Docker:** Implemented to ensure a consistent and reproducible environment across all stages of development and deployment, simplifying setup and eliminating "it works on my machine" issues.
 *   **Multi-Stage Docker Builds:** Used to create optimized, smaller, and more secure production images by separating the build environment from the final runtime environment.
+
+---
+
+## 11. Future Work
+
+*   **Separate CI/CD Pipelines:** A key improvement would be to separate the CI/CD pipelines for the frontend and backend. Currently, a single workflow is triggered for both. Creating distinct workflows would optimize build times, improve clarity, and allow for independent deployments.
+*   **Refine CORS Policy:** For a production environment, the backend's CORS policy should be restricted to only allow requests from the specific frontend domain, rather than allowing all origins.
+*   **Enhance Test Coverage:** Increase unit and integration test coverage for both the frontend and backend to ensure long-term stability and reliability.
+*   **Secret Management:** Move sensitive information (like JWT secrets and AWS keys) from `.env` files to a dedicated secret management service like AWS Secrets Manager or HashiCorp Vault, especially for production deployments.
